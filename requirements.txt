@@ -1,0 +1,7 @@
+openai
+langchain
+fastapi
+uvicorn
+azure-cognitiveservices-speech
+vaderSentiment
+python-dotenv
