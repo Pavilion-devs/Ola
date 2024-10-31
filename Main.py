@@ -75,7 +75,7 @@ conversation = ConversationChain(
     llm=llm,
     prompt=prompt_template,
     memory=memory,
-    verbose=True,
+    verbose=False,
 )
 
 class UserMessage(BaseModel):
