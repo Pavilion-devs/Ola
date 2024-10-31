@@ -1,5 +1,4 @@
 from langchain.chat_models import ChatOpenAI
-import openai
 import threading
 import time
 import os
@@ -103,7 +102,6 @@ async def get_ai_response(user_message: UserMessage, response_format: str):
     role = user_message.role
 
     if user_input.lower() == "exit":
-        print("1")
         feedback = overall_feedback(conversation_history)
         custom_data = {"feedback": feedback, "status": 200}
         return JSONResponse(content=custom_data)
@@ -124,13 +122,10 @@ async def get_ai_response(user_message: UserMessage, response_format: str):
         })
 
         ai_response = result['response']
-
-    print(f"User: {user_input}")
     if response_format == "text":
         ai_message = ChatMessage(role="system", content=ai_response)
         conversation_history.append(ai_message)
         custom_data = {"response": ai_response, "status": 200}
-        print(custom_data)
         return JSONResponse(content=custom_data)
 
 
