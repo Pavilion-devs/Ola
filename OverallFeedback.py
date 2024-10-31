@@ -80,12 +80,19 @@ def overall_feedback(conversation_history):
     sentiment = sentiment if sentiment is not None else 0
     engagement = engagement if engagement is not None else 0
 
-    overall_feedback_percentage = round((sentiment + engagement) /2 * 100)
+    try:
+        overall_feedback_percentage = round((sentiment + engagement) / 2 * 100)
+    except ZeroDivisionError:
+        return "Could not calculate feedback due to missing data." 
 
-    if overall_feedback_percentage >=75:
-        return "You're a communication rockstar! Your engagement and insights were top-notch. Your Feedback is {overall_feedback_percentage} %"
+    if overall_feedback_percentage >= 75:
+        return f"You're a communication rockstar! Your engagement and insights were top-notch. Your Feedback is {overall_feedback_percentage} %"
     elif overall_feedback_percentage >= 50:
-        return "Great Job.There's space to be more proactive and dive deeper into the topics. Your Feedback is {overall_feedback_percentage} %"
+        return f"Great Job. You're on the right track!  Your Feedback is {overall_feedback_percentage} %"
+    elif overall_feedback_percentage >= 25:
+        return f"Your feedback is {overall_feedback_percentage}%.  Try being more specific and providing more details. "
+    else:
+        return f"Your feedback is {overall_feedback_percentage}%.  Engage more actively with the AI and be more open to conversation. "
     
 
 
