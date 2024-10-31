@@ -29,13 +29,13 @@ def handle_voice_response(ai_response):
 
     def synthesis_completed(evt):
         if evt.result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
-            print("Speech synthesized for text [{}]".format(ai_response))
+            return "Speech synthesized for text [{}]".format(ai_response))
             
         elif evt.result.reason == speechsdk.ResultReason.Canceled:
             cancellation_details = evt.result.cancellation_details
-            print("Speech synthesis canceled: {}".format(cancellation_details.reason))
+            return "Speech synthesis canceled: {}".format(cancellation_details.reason)"
             if cancellation_details.reason == speechsdk.CancellationReason.Error:
-                print("Error details: {}".format(cancellation_details.error_details))
+                return "Error details: {}".format(cancellation_details.error_details)
 
             synthesis_completed_flag = True
 
@@ -51,11 +51,6 @@ def handle_voice_response(ai_response):
 
     return json.dumps({"status": "success", "message": "Speech synthesized successfully", "text": ai_response})
 
-
-def generate_text_concurrently(text):
-    for char in text:
-        print(char, end='', flush=True)
-        time.sleep(0.1) 
 
 
 
