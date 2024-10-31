@@ -15,6 +15,9 @@ headers = {
 }
 
 
+POSITIVE_THRESHOLD = float(os.getenv('POSITIVE_THRESHOLD', 0.05))
+NEGATIVE_THRESHOLD = float(os.getenv('NEGATIVE_THRESHOLD', -0.05))
+
 def sentiment_score(conversation_history):
     combined_text = ' '.join([message.content for message in conversation_history if isinstance(message, HumanMessage)])
 
@@ -24,11 +27,11 @@ def sentiment_score(conversation_history):
     Negative = sentiment_dict['neg']
     Positive = sentiment_dict['pos']
 
-    if Positive >= 0.05 :
+    if Positive >= POSITIVE_THRESHOLD:
         return 1
-    elif Negative <= - 0.05 :
+    elif Negative <= NEGATIVE_THRESHOLD:
         return 0.5
-    else :
+    else:
         return None
 
 
