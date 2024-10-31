@@ -54,5 +54,5 @@ def handle_conversation_analysis(user_input):
             raise HTTPException(status_code=404, detail="threshold not passed")
 
     else:
-        print("Error:", response.status_code, response.text)
+        logger.error(f"Error: {response.status_code}, {response.text}")
         return NameError
